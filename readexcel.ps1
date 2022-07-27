@@ -1,8 +1,8 @@
-# ï¿½ï¿½ï¿½iï¿½ÆŒï¿½ï¿½Cï¿½Ìoï¿½Íï¿½Ìƒtï¿½@ï¿½Cï¿½ï¿½ï¿½Iï¿½[ï¿½vï¿½ï¿½
+# ‘Ši‚ÆŒ¤C‚Ìo—Íæ‚Ìƒtƒ@ƒCƒ‹ƒI[ƒvƒ“
 $qualificationFile = "shikaku.csv"
 $trainingFile = "kensyu.csv"
 
-# ï¿½Ç‚İï¿½ï¿½İŠJï¿½nï¿½s
+# “Ç‚İ‚İŠJns
 $qualificationRowNumber = 4
 $trainingRowNumber = 4
 
@@ -11,21 +11,21 @@ $trainingSheet = "BBB"
 
 $shikakWriter = New-Object System.IO.StreamWriter($qualificationFile, $false, [System.Text.Encoding]::GetEncoding("sjis"))
 $traiinigWriter = New-Object System.IO.StreamWriter($trainingFile, $false, [System.Text.Encoding]::GetEncoding("sjis"))
-# ï¿½wï¿½bï¿½_ï¿½[ï¿½Ç‰ï¿½
-$shikakWriter.WriteLine("ï¿½Ğˆï¿½ï¿½Ôï¿½,ï¿½N,ï¿½ï¿½ï¿½iï¿½ï¿½")
-$traiinigWriter.WriteLine("ï¿½Ğˆï¿½ï¿½Ôï¿½,ï¿½N,ï¿½ï¿½ï¿½Cï¿½ï¿½")
+# ƒwƒbƒ_[’Ç‰Á
+$shikakWriter.WriteLine("Ğˆõ”Ô†,”N,‘Ši–¼")
+$traiinigWriter.WriteLine("Ğˆõ”Ô†,”N,Œ¤C–¼")
 
-# Excelï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½Ìˆê——ï¿½ï¿½ï¿½æ“¾
+# Excelƒtƒ@ƒCƒ‹‚Ìˆê——‚ğæ“¾
 $files = Get-Item *.xlsx
 
-# Excelï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½`ï¿½Fï¿½bï¿½Nï¿½ï¿½
+# Excelƒtƒ@ƒCƒ‹‚ğƒ`ƒFƒbƒN‚µ
 foreach($file in $files){
   Write-Host($file)
 
-  # ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğˆï¿½ï¿½Ôï¿½ï¿½æ“¾
+  # ƒtƒ@ƒCƒ‹–¼‚©‚çĞˆõ”Ô†æ“¾
   $employeeId =  $file.Name.Substring(0, 6);
 
-  # Excelï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½Ì—Lï¿½ï¿½ï¿½`ï¿½Fï¿½bï¿½N
+  # Excelƒtƒ@ƒCƒ‹‚Ì—L–³ƒ`ƒFƒbƒN
   if (!(Test-Path $file)) {
     Write-Host $file not found.
     exit 1
@@ -34,35 +34,35 @@ foreach($file in $files){
   try {
       $file = (Get-ChildItem $file).FullName
       $excel = New-Object -ComObject Excel.Application
-      $excel.Visible = $false    # <- Excelï¿½ï¿½\ï¿½ï¿½
+      $excel.Visible = $false    # <- Excel”ñ•\¦
       $book = $excel.Workbooks.Open($file)
 
-      # ï¿½ï¿½ï¿½iï¿½ï¿½ï¿½Ìƒtï¿½@ï¿½Cï¿½ï¿½ï¿½oï¿½ï¿½
-      $sheet1 = $excel.Worksheets.Item($qualificationSheet)   # <- ï¿½ï¿½ï¿½iï¿½ï¿½ï¿½ÌƒVï¿½[ï¿½gï¿½ï¿½Iï¿½ï¿½
+      # ‘Šiî•ñ‚Ìƒtƒ@ƒCƒ‹o—Í
+      $sheet1 = $excel.Worksheets.Item($qualificationSheet)   # <- ‘Šiî•ñ‚ÌƒV[ƒg‚ğ‘I‘ğ
       $line = $qualificationRowNumber
 
       $item1 = $sheet1.Cells.Item($line,1).Text
       $item2 = $sheet1.Cells.Item($line,2).Text
 
       while ( ($item1 -ne "") -and ($item2 -ne "")) {
-          # Write-Host "$line,$employeeId,$item1,$item2"    # <- ï¿½æ“¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\ï¿½ï¿½
-          $shikakWriter.WriteLine("$employeeId,$item1,$item2") # <- ï¿½æ“¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+          # Write-Host "$line,$employeeId,$item1,$item2"    # <- æ“¾‚µ‚½î•ñ‚ğ•\¦
+          $shikakWriter.WriteLine("$employeeId,$item1,$item2") # <- æ“¾‚µ‚½î•ñ‚ğ‘‚«‚İ
 
           $line++
           $item1 = $sheet1.Cells.Item($line,1).Text
           $item2 = $sheet1.Cells.Item($line,2).Text
       }
 
-      # ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½Ìƒtï¿½@ï¿½Cï¿½ï¿½ï¿½oï¿½ï¿½
-      $sheet2 = $excel.Worksheets.Item($trainingSheet)   # <- ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½ÌƒVï¿½[ï¿½gï¿½ï¿½Iï¿½ï¿½
+      # Œ¤Cî•ñ‚Ìƒtƒ@ƒCƒ‹o—Í
+      $sheet2 = $excel.Worksheets.Item($trainingSheet)   # <- Œ¤Cî•ñ‚ÌƒV[ƒg‚ğ‘I‘ğ
       $line = $trainingRowNumber
 
       $item1 = $sheet2.Cells.Item($line,1).Text
       $item2 = $sheet2.Cells.Item($line,2).Text
 
       while ( ($item1 -ne "") -and ($item2 -ne "")) {
-          # Write-Host "$line,$employeeId,$item1,$item2"    # <- ï¿½æ“¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\ï¿½ï¿½
-          $traiinigWriter.WriteLine("$employeeId,$item1,$item2") # <- ï¿½æ“¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+          # Write-Host "$line,$employeeId,$item1,$item2"    # <- æ“¾‚µ‚½î•ñ‚ğ•\¦
+          $traiinigWriter.WriteLine("$employeeId,$item1,$item2") # <- æ“¾‚µ‚½î•ñ‚ğ‘‚«‚İ
 
           $line++
           $item1 = $sheet2.Cells.Item($line,1).Text
@@ -73,15 +73,15 @@ foreach($file in $files){
       $exp = $error[0].ToString()
       Write-Host $exp
   } finally {
-      # Excelï¿½Nï¿½ï¿½ï¿½[ï¿½Y
+      # ExcelƒNƒ[ƒY
       $excel.Quit()
-      # ï¿½Ïï¿½ï¿½Ì”jï¿½ï¿½
+      # •Ï”‚Ì”jŠü
       $book = $null
       $excel = $null
       [GC]::Collect()
   }
 
-  # ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½^ï¿½`ï¿½Fï¿½bï¿½N
+  # ƒpƒ‰ƒƒ^ƒ`ƒFƒbƒN
   if ($file -eq $null) {
     $thie = $MyInvocation.MyCommand.Name
     "Usage: $this <Excel file>"
@@ -89,6 +89,6 @@ foreach($file in $files){
   }
 }
 
-# ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½[ï¿½Y
+# ƒtƒ@ƒCƒ‹ƒNƒ[ƒY
 $shikakWriter.Close()
 $traiinigWriter.Close()
